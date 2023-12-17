@@ -6,6 +6,8 @@ class Load {
     this.load.image("wallH", "assets/platform.png");
     this.load.image("coin", "assets/coin.png");
     this.load.image("enemy", "assets/enemy.png");
+    this.load.audio("jump", ["assets/jump.mp3"]);
+    this.load.audio("coin", ["assets/coin.mp3"]);
 
     // Display a loading label
     let loadLabel = this.add.text(250, 170, "loading", {

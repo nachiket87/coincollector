@@ -19,6 +19,8 @@ class Play {
       callback: () => this.addEnemy(),
       loop: true,
     });
+    this.jumpSound = this.sound.add("jump");
+    this.coinSound = this.sound.add("coin");
   }
 
   update() {
@@ -34,6 +36,7 @@ class Play {
     }
 
     if (this.physics.overlap(this.player, this.coin)) {
+      this.coinSound.play();
       this.takeCoin();
     }
     if (this.physics.overlap(this.player, this.enemies)) {
@@ -64,6 +67,7 @@ class Play {
     }
     if (this.arrow.up.isDown && this.player.body.onFloor()) {
       this.player.body.velocity.y = -320;
+      this.jumpSound.play();
     }
   }
 
