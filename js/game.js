@@ -12,5 +12,4 @@ game.scene.add("menu", Menu);
 game.scene.add("play", Play);
 
 // Start the 'load' scene
-console.log("hi");
-console.log(game.scene.start("load"));
+game.scene.start("load");
