@@ -44,14 +44,14 @@ class Play {
 
   update() {
     this.movePlayer();
-    if (this.player.x > 500) {
+    if (this.player.x > 640) {
       this.player.x = 0;
     } else if (this.player.x < 0) {
-      this.player.x = 500;
+      this.player.x = 640;
     }
 
-    if (this.player.y > 340 || this.player.y < 0) {
-      this.endGame();
+    if (this.player.y > 480) {
+      this.player.y = 0;
     }
 
     if (this.physics.overlap(this.player, this.coin)) {
@@ -68,12 +68,18 @@ class Play {
 
     this.walls.create(50, 10, "wallH");
     this.walls.create(450, 10, "wallH");
-    this.walls.create(0, 330, "wallH");
-    this.walls.create(450, 330, "wallH");
+
     this.walls.create(0, 170, "wallH");
-    this.walls.create(500, 170, "wallH");
-    this.walls.create(250, 90, "wallH");
-    this.walls.create(250, 250, "wallH");
+
+    // these are good
+    this.walls.create(500, 220, "wallH");
+
+    // Bottom 2nd last wall
+    this.walls.create(220, 340, "wallH");
+
+    // bottom walls
+    this.walls.create(0, 470, "wallH");
+    this.walls.create(450, 470, "wallH");
   }
 
   movePlayer() {
@@ -88,7 +94,7 @@ class Play {
       this.player.anims.play("turn", true);
     }
     if (this.arrow.up.isDown && this.player.body.onFloor()) {
-      this.player.body.velocity.y = -320;
+      this.player.body.velocity.y = -420;
       this.jumpSound.play();
     }
   }
@@ -100,12 +106,19 @@ class Play {
     enemy.body.bounce.x = 1;
 
     this.time.addEvent({
-      delay: 10000,
+      delay: 15000,
       callback: () => enemy.destroy(),
     });
   }
 
   takeCoin() {
+    this.coin.setScale(0);
+    this.tweens.add({
+      targets: this.coin, // on the coin
+      scale: 0.5, // to scale it to 1 (its original size)
+      duration: 300, // in 300ms
+    });
+
     this.updateCoinPosition();
     this.score++;
     this.scoreLabel.setText("Score: " + this.score);
