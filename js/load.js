@@ -2,6 +2,7 @@ class Load {
   preload() {
     // Load all assets
     this.load.image("background", "assets/background.png");
+    this.load.image("pixel", "assets/pixel.png");
     this.load.image("wallH", "assets/platform.png");
     this.load.image("coin", "assets/coin.png");
     this.load.image("enemy", "assets/enemy.png");

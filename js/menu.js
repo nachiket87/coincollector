@@ -4,11 +4,19 @@ class Menu {
 
     this.add.image(320, 180, "background");
 
-    let nameLabel = this.add.text(320, 120, "Coin Collector", {
+    let nameLabel = this.add.text(320, -50, "Coin Collector", {
       font: "50px Arial",
       fill: "#fff",
     });
+
     nameLabel.setOrigin(0.5, 0.5);
+
+    this.tweens.add({
+      targets: nameLabel,
+      y: 120,
+      duration: 1000,
+      ease: "bounce.out",
+    });
 
     let scoreText = "score: " + score;
     let scoreLabel = this.add.text(320, 225, scoreText, {

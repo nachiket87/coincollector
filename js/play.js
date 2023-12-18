@@ -1,5 +1,14 @@
 class Play {
   create() {
+    let particles = this.add.particles("pixel");
+
+    this.emitter = particles.createEmitter({
+      quantity: 15,
+      speed: { min: -150, max: 150 },
+      scale: { start: 2, end: 0.1 },
+      lifespan: 800,
+      on: false,
+    });
     this.player = this.physics.add.sprite(250, 170, "player");
     this.coin = this.physics.add.sprite(60, 130, "coin");
     this.enemies = this.physics.add.group({ collideWorldBounds: true });
@@ -83,6 +92,9 @@ class Play {
   }
 
   movePlayer() {
+    if (!this.player.active) {
+      return;
+    }
     if (this.arrow.left.isDown) {
       this.player.body.velocity.x = -200;
       this.player.anims.play("left", true);
@@ -125,7 +137,13 @@ class Play {
   }
 
   endGame() {
-    this.scene.start("menu", { score: this.score });
+    this.emitter.setPosition(this.player.x, this.player.y);
+    this.emitter.explode();
+    this.player.destroy();
+    this.time.addEvent({
+      delay: 1000,
+      callback: () => this.scene.start("menu", { score: this.score }),
+    });
   }
 
   updateCoinPosition() {
